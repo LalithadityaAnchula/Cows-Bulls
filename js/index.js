@@ -17,7 +17,7 @@ myChoice.change(function() {
   myChoice.slideUp("fast");
   $(".play").slideDown();
   progressBar.slideDown();
-  prompt.text("Try to guess the " + digits + " digit number you have " + attempts + " attempts");
+  prompt.text("Try to guess the " + digits + " digit number, you have " + attempts + " attempts");
   validate.slideDown();
   submit.slideDown();
   startGame(digits);
