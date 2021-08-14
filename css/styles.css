@@ -1,35 +1,35 @@
 body {
-  font-family: 'Comic Neue';
+  font-family: 'Capriola', sans-serif;
   font-weight: bold;
   background-image: url(../images/chalk-board.png);
 }
 
-main{
+main {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-label{
+label {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form-control,.form-select{
+.form-control, .form-select {
   border-radius: 0.7rem;
   margin: 0 9px;
   width: auto;
 }
 
-.mb-3{
+.mb-3 {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.play-container{
+.play-container {
   min-height: 50vh;
   border: none;
   border-radius: 2rem;
@@ -37,12 +37,12 @@ label{
 
 .title {
   background-size: cover;
-  background-clip:border-box;
+  background-clip: border-box;
   font-size: 6rem;
   padding-bottom: 50px;
   text-align: center;
-  background-image: linear-gradient(to right top,rgba(255,255,255,0.7),rgba(255,255,255,0.3));
-  -webkit-background-clip:text;
+  background-image: linear-gradient(to right top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+  -webkit-background-clip: text;
   color: transparent;
 }
 
@@ -51,7 +51,7 @@ label{
 }
 
 @media (max-width:600px) {
-  .title{
+  .title {
     font-size: 3.4rem;
   }
 }
