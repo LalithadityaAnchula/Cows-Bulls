@@ -29,6 +29,7 @@ function startGame(n) {
     if (answer.includes(randomDigit) == false)
       answer += String(randomDigit);
   }
+  myInput.attr("placeholder", n+" digit number");
 }
 
 function getRandomNumber() {
