@@ -2,6 +2,7 @@ var attempts = 10;
 var attempt = 0;
 var answer = "";
 var digits = 0;
+var interval;
 var num = 0;
 var success = $(".alert-success");
 var failure = $(".alert-warning");
@@ -11,16 +12,21 @@ var prompt = $(".digits");
 var progressBar = $(".life");
 var validate = $(".validate-button");
 var submit = $(".submit-button");
+var won = 0;
 
 myChoice.change(function() {
   digits = Number($(this).children("option:selected").val());
   myChoice.slideUp("fast");
   $(".play").slideDown();
   progressBar.slideDown();
+  updateProgressBar();
   prompt.text("Try to guess the " + digits + " digit number, you have " + attempts + " attempts");
   validate.slideDown();
   submit.slideDown();
   startGame(digits);
+  $('#validation-choice option').prop('selected', function () {
+                return this.defaultSelected;
+            });
 });
 
 function startGame(n) {
@@ -53,18 +59,37 @@ validate.click(
   });
 
 submit.click(function() {
-    location.reload();
+    // location.reload();
+    restartGame();
   });
+
+function restartGame(){
+  $(".progress").fadeIn();
+  attempts = 10;
+  attempt = 0;
+  progressBar.slideDown("fast");
+  myChoice.slideDown("fast");
+  $(".play").slideUp();
+  validate.slideUp();
+  if(won == 1){
+    success.slideUp("fast");
+    prompt.slideDown();
+  }
+  if(won == -1){
+     failure.slideUp("fast");
+     prompt.slideDown();
+  }
+  won = 0;
+  submit.slideUp("fast");
+  prompt.text("No: of digits");
+  progressBar.removeClass("bg-danger");
+}
 
 //Evaluating input & giving feedback
 
 function checkInput() {
-  if (attempts <= 4) {
+  if (attempts <= 4)
     progressBar.addClass("bg-danger");
-    setInterval(function() {
-      progressBar.fadeToggle(1000);
-    }, 600);
-  }
   num = String(myInput.val());
   if ($.isNumeric(num) && num.length <= digits) return true;
   else return false;
@@ -123,6 +148,11 @@ function updateProgressBar(){
   progressBar.attr('aria-valuenow', progressValue);
 }
 
+setInterval(function() {
+  if(attempts<=4)
+    progressBar.fadeToggle(1000);
+}, 1000);
+
 function bounce(thing) {
   var interval = 100;
   var distance = 20;
@@ -141,6 +171,7 @@ function bounce(thing) {
 }
 
 function failAnimation() {
+  won = -1;
   bounce($(".progress"));
   $(".progress").fadeOut();
   prompt.slideUp();
@@ -150,6 +181,7 @@ function failAnimation() {
 }
 
 function won() {
+  won = 1;
   prompt.text("You are amaizing !")
   success.slideDown();
   validate.slideUp("fast");
