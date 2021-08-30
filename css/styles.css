@@ -16,6 +16,11 @@ label {
   justify-content: center;
 }
 
+.digits{
+  color: blue;
+  position: relative;
+}
+
 .form-control, .form-select {
   border-radius: 0.7rem;
   margin: 0 9px;
