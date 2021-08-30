@@ -59,7 +59,6 @@ validate.click(
   });
 
 submit.click(function() {
-    // location.reload();
     restartGame();
   });
 
@@ -111,6 +110,7 @@ function giveFeedback(){
   attempt = attempt + 1;
   attempts = attempts - 1;
   prompt.text(cows + " cows & " + bulls + " bulls");
+  bounce(prompt);
 }
 
 //Getting Cows and BUlls..
