@@ -12,7 +12,7 @@ var prompt = $(".digits");
 var progressBar = $(".life");
 var validate = $(".validate-button");
 var submit = $(".submit-button");
-var won = 0;
+var win = 0;
 
 myChoice.change(function() {
   digits = Number($(this).children("option:selected").val());
@@ -24,18 +24,19 @@ myChoice.change(function() {
   validate.slideDown();
   submit.slideDown();
   startGame(digits);
-  $('#validation-choice option').prop('selected', function () {
-                return this.defaultSelected;
-            });
+  $('#validation-choice option').prop('selected', function() {
+    return this.defaultSelected;
+  });
 });
 
 function startGame(n) {
+  answer = "";
   while (answer.length < n) {
     var randomDigit = getRandomNumber();
     if (answer.includes(randomDigit) == false)
       answer += String(randomDigit);
   }
-  myInput.attr("placeholder", n+" digit number");
+  myInput.attr("placeholder", n + " digit number");
 }
 
 function getRandomNumber() {
@@ -46,12 +47,11 @@ function getRandomNumber() {
 validate.click(
   function() {
     if (attempts <= 0) failAnimation();
-    if (checkInput() == false){
+    if (checkInput() == false) {
       bounce(myInput);
       myInput.addClass("is-invalid");
       prompt.text("Please enter valid input");
-    }
-    else {
+    } else {
       myInput.removeClass("is-invalid");
       myInput.addClass("is-valid");
       validate_input(num);
@@ -59,10 +59,10 @@ validate.click(
   });
 
 submit.click(function() {
-    restartGame();
-  });
+  restartGame();
+});
 
-function restartGame(){
+function restartGame() {
   $(".progress").fadeIn();
   attempts = 10;
   attempt = 0;
@@ -70,15 +70,15 @@ function restartGame(){
   myChoice.slideDown("fast");
   $(".play").slideUp();
   validate.slideUp();
-  if(won == 1){
+  if (win == 1) {
     success.slideUp("fast");
     prompt.slideDown();
   }
-  if(won == -1){
-     failure.slideUp("fast");
-     prompt.slideDown();
+  if (win == -1) {
+    failure.slideUp("fast");
+    prompt.slideDown();
   }
-  won = 0;
+  win = 0;
   submit.slideUp("fast");
   prompt.text("No: of digits");
   progressBar.removeClass("bg-danger");
@@ -102,7 +102,7 @@ function validate_input(num) {
   }
 }
 
-function giveFeedback(){
+function giveFeedback() {
   bulls = getBulls(num);
   cows = getCows(num);
   if (cows >= bulls)
@@ -142,14 +142,14 @@ function getBulls(num) {
 
 //Animations using Jquery..
 
-function updateProgressBar(){
+function updateProgressBar() {
   progressValue = attempts * 10;
   progressBar.css('width', progressValue + "%");
   progressBar.attr('aria-valuenow', progressValue);
 }
 
 setInterval(function() {
-  if(attempts<=4)
+  if (attempts <= 4)
     progressBar.fadeToggle(1000);
 }, 1000);
 
@@ -171,7 +171,7 @@ function bounce(thing) {
 }
 
 function failAnimation() {
-  won = -1;
+  win = -1;
   bounce($(".progress"));
   $(".progress").fadeOut();
   prompt.slideUp();
@@ -181,7 +181,7 @@ function failAnimation() {
 }
 
 function won() {
-  won = 1;
+  win = 1;
   prompt.text("You are amaizing !")
   success.slideDown();
   validate.slideUp("fast");
